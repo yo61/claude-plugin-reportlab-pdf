@@ -1,0 +1,18 @@
+# Tooling-only project — anchors the ruff version via uv.lock so
+# `.pre-commit-config.yaml` and CI lint the Python scripts with the same
+# binary (single source of truth). This package is never published; the
+# plugin's user-facing version lives in `.claude-plugin/plugin.json`.
+[project]
+name = "reportlab-pdf-plugin-tooling"
+version = "0"
+description = "Dev tooling for the reportlab-pdf Claude Code plugin (not published)"
+requires-python = ">=3.10"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.14",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100

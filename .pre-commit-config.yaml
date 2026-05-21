@@ -21,12 +21,23 @@ repos:
     hooks:
       - id: zizmor
 
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.14
+  # ruff runs via `uv run` so its version is single-sourced from uv.lock
+  # (the only Python tooling dep declared in pyproject.toml). No second
+  # `rev:` to keep aligned with anything.
+  - repo: local
     hooks:
       - id: ruff-check
-        args: [--fix]
+        name: ruff check
+        entry: uv run --no-sync ruff check --fix
+        language: system
+        types: [python]
+        pass_filenames: false
       - id: ruff-format
+        name: ruff format
+        entry: uv run --no-sync ruff format
+        language: system
+        types: [python]
+        pass_filenames: false
 
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.25.0

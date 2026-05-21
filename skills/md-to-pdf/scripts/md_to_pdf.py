@@ -274,9 +274,7 @@ class PlatypusRenderer:
         out: list[Flowable] = []
         for child in tok.get("children", []):
             if child["type"] == "paragraph":
-                out.append(
-                    Paragraph(self._inline(child["children"]), self.styles["Quote"])
-                )
+                out.append(Paragraph(self._inline(child["children"]), self.styles["Quote"]))
             else:
                 out.extend(self._block(child))
         return out
@@ -349,9 +347,7 @@ class PlatypusRenderer:
         link = f'<link href="{url}" color="{colour}">{text}</link>'
         if not self.options.show_link_urls:
             return link
-        url_link = (
-            f'<link href="{url}" color="{colour}">{escape(tok["attrs"]["url"])}</link>'
-        )
+        url_link = f'<link href="{url}" color="{colour}">{escape(tok["attrs"]["url"])}</link>'
         return f"{text} ({url_link})"
 
     def _inline_softbreak(self, _: dict[str, Any]) -> str:
