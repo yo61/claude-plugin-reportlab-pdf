@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.2](https://github.com/yo61/claude-plugin-reportlab-pdf/compare/v1.2.1...v1.2.2) (2026-05-21)
+
+
+### Bug Fixes
+
+* scope release App token to required repos and permissions ([6022727](https://github.com/yo61/claude-plugin-reportlab-pdf/commit/6022727d3fa24375037c7e0879292e5ef1bbca1a))
+* scope release App token to required repos and permissions ([fb73a76](https://github.com/yo61/claude-plugin-reportlab-pdf/commit/fb73a7696398710b5c66f75da692169e961a0ebb))
+
 ## [1.2.1](https://github.com/yo61/claude-plugin-reportlab-pdf/compare/v1.2.0...v1.2.1) (2026-05-18)
 
 
