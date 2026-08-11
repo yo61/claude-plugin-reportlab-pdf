@@ -6,7 +6,7 @@
 name = "reportlab-pdf-plugin-tooling"
 version = "0"
 description = "Dev tooling for the reportlab-pdf Claude Code plugin (not published)"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [dependency-groups]
 dev = [
