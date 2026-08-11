@@ -59,10 +59,10 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, HRFlowable, Spacer,
 doc = SimpleDocTemplate(
     "output.pdf",
     pagesize=A4,
-    topMargin=18*mm,
-    bottomMargin=18*mm,
-    leftMargin=20*mm,
-    rightMargin=20*mm,
+    topMargin=18 * mm,
+    bottomMargin=18 * mm,
+    leftMargin=20 * mm,
+    rightMargin=20 * mm,
 )
 ```
 
@@ -75,10 +75,10 @@ Margins of 18-20mm work well for professional documents. Going below 15mm starts
 Define colours as constants using `HexColor`:
 
 ```python
-DARK = HexColor("#1a1a1a")      # Near-black for body text
-ACCENT = HexColor("#2E5090")    # Blue for headings and name
-GREY = HexColor("#555555")      # Mid-grey for secondary text
-RULE = HexColor("#CCCCCC")      # Light grey for horizontal rules
+DARK = HexColor("#1a1a1a")  # Near-black for body text
+ACCENT = HexColor("#2E5090")  # Blue for headings and name
+GREY = HexColor("#555555")  # Mid-grey for secondary text
+RULE = HexColor("#CCCCCC")  # Light grey for horizontal rules
 ```
 
 ## Paragraph styles
@@ -106,18 +106,20 @@ The `leading` parameter controls line height in points. Without it, ReportLab's 
 Each `ParagraphStyle` takes these key properties:
 
 ```python
-styles.add(ParagraphStyle(
-    "StyleName",
-    fontName="Helvetica",        # Font family
-    fontSize=10,                 # Size in points
-    leading=14,                  # Line height — ALWAYS SET THIS
-    textColor=DARK,              # Text colour
-    spaceAfter=4,                # Space below in points
-    spaceBefore=0,               # Space above in points
-    alignment=TA_JUSTIFY,        # TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
-    leftIndent=0,                # Left indent in points
-    bulletIndent=0,              # Indent for bullet character
-))
+styles.add(
+    ParagraphStyle(
+        "StyleName",
+        fontName="Helvetica",  # Font family
+        fontSize=10,  # Size in points
+        leading=14,  # Line height — ALWAYS SET THIS
+        textColor=DARK,  # Text colour
+        spaceAfter=4,  # Space below in points
+        spaceBefore=0,  # Space above in points
+        alignment=TA_JUSTIFY,  # TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
+        leftIndent=0,  # Left indent in points
+        bulletIndent=0,  # Indent for bullet character
+    )
+)
 ```
 
 ### Available built-in fonts
@@ -136,50 +138,98 @@ Other built-in families: `Times-Roman`, `Courier`. For custom fonts, register TT
 This set has been tested and refined across multiple documents (CVs, letters, reports). Use it as a starting point and adapt as needed:
 
 ```python
-styles.add(ParagraphStyle("DocTitle",
-    fontName="Helvetica-Bold", fontSize=20, leading=26,
-    textColor=ACCENT, spaceAfter=6))
+styles.add(
+    ParagraphStyle(
+        "DocTitle",
+        fontName="Helvetica-Bold",
+        fontSize=20,
+        leading=26,
+        textColor=ACCENT,
+        spaceAfter=6,
+    )
+)
 
-styles.add(ParagraphStyle("Subtitle",
-    fontName="Helvetica", fontSize=11, leading=15,
-    textColor=GREY, spaceAfter=4))
+styles.add(
+    ParagraphStyle(
+        "Subtitle", fontName="Helvetica", fontSize=11, leading=15, textColor=GREY, spaceAfter=4
+    )
+)
 
-styles.add(ParagraphStyle("ContactInfo",
-    fontName="Helvetica", fontSize=9, leading=13,
-    textColor=GREY, spaceAfter=8))
+styles.add(
+    ParagraphStyle(
+        "ContactInfo", fontName="Helvetica", fontSize=9, leading=13, textColor=GREY, spaceAfter=8
+    )
+)
 
-styles.add(ParagraphStyle("SectionHeading",
-    fontName="Helvetica-Bold", fontSize=12,
-    textColor=ACCENT, spaceBefore=12, spaceAfter=4))
+styles.add(
+    ParagraphStyle(
+        "SectionHeading",
+        fontName="Helvetica-Bold",
+        fontSize=12,
+        textColor=ACCENT,
+        spaceBefore=12,
+        spaceAfter=4,
+    )
+)
 
-styles.add(ParagraphStyle("CompanyName",
-    fontName="Helvetica-Bold", fontSize=11,
-    textColor=DARK, spaceBefore=8, spaceAfter=1))
+styles.add(
+    ParagraphStyle(
+        "CompanyName",
+        fontName="Helvetica-Bold",
+        fontSize=11,
+        textColor=DARK,
+        spaceBefore=8,
+        spaceAfter=1,
+    )
+)
 
-styles.add(ParagraphStyle("RoleTitle",
-    fontName="Helvetica-BoldOblique", fontSize=10,
-    textColor=DARK, spaceAfter=1))
+styles.add(
+    ParagraphStyle(
+        "RoleTitle", fontName="Helvetica-BoldOblique", fontSize=10, textColor=DARK, spaceAfter=1
+    )
+)
 
-styles.add(ParagraphStyle("DateRange",
-    fontName="Helvetica", fontSize=9,
-    textColor=GREY, spaceAfter=3))
+styles.add(
+    ParagraphStyle("DateRange", fontName="Helvetica", fontSize=9, textColor=GREY, spaceAfter=3)
+)
 
-styles.add(ParagraphStyle("Body",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=4, alignment=TA_JUSTIFY))
+styles.add(
+    ParagraphStyle(
+        "Body",
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=4,
+        alignment=TA_JUSTIFY,
+    )
+)
 
-styles.add(ParagraphStyle("Bullet",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=3,
-    leftIndent=14, bulletIndent=0, alignment=TA_JUSTIFY))
+styles.add(
+    ParagraphStyle(
+        "Bullet",
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=3,
+        leftIndent=14,
+        bulletIndent=0,
+        alignment=TA_JUSTIFY,
+    )
+)
 
-styles.add(ParagraphStyle("SkillLine",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=4))
+styles.add(
+    ParagraphStyle(
+        "SkillLine", fontName="Helvetica", fontSize=9.5, leading=13, textColor=DARK, spaceAfter=4
+    )
+)
 
-styles.add(ParagraphStyle("CompactLine",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=2))
+styles.add(
+    ParagraphStyle(
+        "CompactLine", fontName="Helvetica", fontSize=9.5, leading=13, textColor=DARK, spaceAfter=2
+    )
+)
 ```
 
 ## Building the document
@@ -194,9 +244,7 @@ story.append(Paragraph("Document Title", styles["DocTitle"]))
 story.append(Paragraph("Subtitle or tagline", styles["Subtitle"]))
 
 # Horizontal rule
-story.append(HRFlowable(
-    width="100%", thickness=1, color=RULE,
-    spaceAfter=6, spaceBefore=2))
+story.append(HRFlowable(width="100%", thickness=1, color=RULE, spaceAfter=6, spaceBefore=2))
 
 # Section heading
 story.append(Paragraph("Section Name", styles["SectionHeading"]))
@@ -242,9 +290,13 @@ Paragraph text supports a subset of HTML tags for inline formatting:
 Example with bold lead-in:
 
 ```python
-story.append(Paragraph(
-    "<b>Led the project</b> — delivered the platform on time and under budget.",
-    styles["Bullet"], bulletText="•"))
+story.append(
+    Paragraph(
+        "<b>Led the project</b> — delivered the platform on time and under budget.",
+        styles["Bullet"],
+        bulletText="•",
+    )
+)
 ```
 
 **Never use Unicode subscript/superscript characters** (like `₂` or `²`) — Helvetica does not include these glyphs and they render as black boxes. Use `<sub>` and `<super>` tags instead.
@@ -254,10 +306,19 @@ story.append(Paragraph(
 Bullets are paragraphs with `bulletText="•"` and a style that defines the indentation:
 
 ```python
-styles.add(ParagraphStyle("Bullet",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=3,
-    leftIndent=14, bulletIndent=0, alignment=TA_JUSTIFY))
+styles.add(
+    ParagraphStyle(
+        "Bullet",
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=3,
+        leftIndent=14,
+        bulletIndent=0,
+        alignment=TA_JUSTIFY,
+    )
+)
 
 story.append(Paragraph("Bullet text here.", styles["Bullet"], bulletText="•"))
 ```
@@ -271,8 +332,8 @@ story.append(Paragraph("Bullet text here.", styles["Bullet"], bulletText="•"))
 ```python
 from reportlab.platypus import PageBreak, Spacer
 
-story.append(PageBreak())       # Force new page
-story.append(Spacer(1, 12))     # 12pt vertical space
+story.append(PageBreak())  # Force new page
+story.append(Spacer(1, 12))  # 12pt vertical space
 ```
 
 Prefer `spaceAfter`/`spaceBefore` on styles over `Spacer` objects — it's cleaner.
@@ -321,9 +382,14 @@ from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.platypus import SimpleDocTemplate, Paragraph, HRFlowable
 
 output_path = "example.pdf"
-doc = SimpleDocTemplate(output_path, pagesize=A4,
-    topMargin=18*mm, bottomMargin=18*mm,
-    leftMargin=20*mm, rightMargin=20*mm)
+doc = SimpleDocTemplate(
+    output_path,
+    pagesize=A4,
+    topMargin=18 * mm,
+    bottomMargin=18 * mm,
+    leftMargin=20 * mm,
+    rightMargin=20 * mm,
+)
 
 DARK = HexColor("#1a1a1a")
 ACCENT = HexColor("#2E5090")
@@ -331,28 +397,65 @@ GREY = HexColor("#555555")
 RULE = HexColor("#CCCCCC")
 
 styles = getSampleStyleSheet()
-styles.add(ParagraphStyle("DocTitle",
-    fontName="Helvetica-Bold", fontSize=20, leading=26,
-    textColor=ACCENT, spaceAfter=6))
-styles.add(ParagraphStyle("Subtitle",
-    fontName="Helvetica", fontSize=11, leading=15,
-    textColor=GREY, spaceAfter=4))
-styles.add(ParagraphStyle("Contact",
-    fontName="Helvetica", fontSize=9, leading=13,
-    textColor=GREY, spaceAfter=8))
-styles.add(ParagraphStyle("Section",
-    fontName="Helvetica-Bold", fontSize=12,
-    textColor=ACCENT, spaceBefore=12, spaceAfter=4))
-styles.add(ParagraphStyle("Body",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=4, alignment=TA_JUSTIFY))
-styles.add(ParagraphStyle("Bullet",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=3,
-    leftIndent=14, bulletIndent=0, alignment=TA_JUSTIFY))
-styles.add(ParagraphStyle("SkillLine",
-    fontName="Helvetica", fontSize=9.5, leading=13,
-    textColor=DARK, spaceAfter=4))
+styles.add(
+    ParagraphStyle(
+        "DocTitle",
+        fontName="Helvetica-Bold",
+        fontSize=20,
+        leading=26,
+        textColor=ACCENT,
+        spaceAfter=6,
+    )
+)
+styles.add(
+    ParagraphStyle(
+        "Subtitle", fontName="Helvetica", fontSize=11, leading=15, textColor=GREY, spaceAfter=4
+    )
+)
+styles.add(
+    ParagraphStyle(
+        "Contact", fontName="Helvetica", fontSize=9, leading=13, textColor=GREY, spaceAfter=8
+    )
+)
+styles.add(
+    ParagraphStyle(
+        "Section",
+        fontName="Helvetica-Bold",
+        fontSize=12,
+        textColor=ACCENT,
+        spaceBefore=12,
+        spaceAfter=4,
+    )
+)
+styles.add(
+    ParagraphStyle(
+        "Body",
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=4,
+        alignment=TA_JUSTIFY,
+    )
+)
+styles.add(
+    ParagraphStyle(
+        "Bullet",
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=3,
+        leftIndent=14,
+        bulletIndent=0,
+        alignment=TA_JUSTIFY,
+    )
+)
+styles.add(
+    ParagraphStyle(
+        "SkillLine", fontName="Helvetica", fontSize=9.5, leading=13, textColor=DARK, spaceAfter=4
+    )
+)
 
 story = []
 
@@ -360,16 +463,14 @@ story = []
 story.append(Paragraph("Person Name", styles["DocTitle"]))
 story.append(Paragraph("Role Title  |  Specialism", styles["Subtitle"]))
 story.append(Paragraph("Location  |  Phone  |  Email", styles["Contact"]))
-story.append(HRFlowable(width="100%", thickness=1, color=RULE,
-    spaceAfter=6, spaceBefore=2))
+story.append(HRFlowable(width="100%", thickness=1, color=RULE, spaceAfter=6, spaceBefore=2))
 
 # Summary section
 story.append(Paragraph("Summary", styles["Section"]))
 story.append(Paragraph("Summary paragraph goes here.", styles["Body"]))
 
 # Divider
-story.append(HRFlowable(width="100%", thickness=0.5, color=RULE,
-    spaceAfter=2, spaceBefore=4))
+story.append(HRFlowable(width="100%", thickness=0.5, color=RULE, spaceAfter=2, spaceBefore=4))
 
 # Experience section with bullets
 story.append(Paragraph("Experience", styles["Section"]))
@@ -382,8 +483,7 @@ for b in [
     story.append(Paragraph(b, styles["Bullet"], bulletText="•"))
 
 # Skills section
-story.append(HRFlowable(width="100%", thickness=0.5, color=RULE,
-    spaceAfter=2, spaceBefore=8))
+story.append(HRFlowable(width="100%", thickness=0.5, color=RULE, spaceAfter=2, spaceBefore=8))
 story.append(Paragraph("Skills", styles["Section"]))
 
 for cat, body in [
