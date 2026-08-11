@@ -49,9 +49,13 @@ jobs:
             (.repository == null or (.repository | type) == "string")
           ' .claude-plugin/plugin.json
 
-  lint:
-    name: lint
+  lint-matrix:
+    name: py${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
@@ -61,9 +65,24 @@ jobs:
       # single source of truth.
       - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
           enable-cache: false
       - run: uv sync --group dev --frozen
       - uses: j178/prek-action@4e14d07f9231acabce116ccfca13b13dd9755ece  # v3.0.0
         with:
           prek-version: 0.4.13
+
+  # Aggregator. The ruleset requires a context literally named `lint`, and
+  # required contexts are exact strings — there is no wildcard form. A matrix
+  # job reports one context per version (`py3.11`, `py3.12`, ...), so gating
+  # on those directly would mean editing the ruleset every time a Python
+  # version is added or dropped, and any stale entry blocks every PR forever.
+  # This fixed-name job keeps `lint` stable across matrix changes.
+  lint:
+    name: lint
+    needs: lint-matrix
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - if: needs.lint-matrix.result != 'success'
+        run: exit 1
