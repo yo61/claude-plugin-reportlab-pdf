@@ -63,7 +63,7 @@ jobs:
       # uv must be on PATH for prek — the ruff hook runs via `uv run`
       # rather than pinning its own ruff version, so the lockfile is the
       # single source of truth.
-      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d  # v10.0.1
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4  # v10.1.0
         with:
           python-version: ${{ matrix.python-version }}
           enable-cache: false
