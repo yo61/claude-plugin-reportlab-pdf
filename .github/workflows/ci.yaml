@@ -11,7 +11,7 @@ jobs:
   commitlint:
     name: Conventional Commits
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       pull-requests: read
     steps:
@@ -29,7 +29,7 @@ jobs:
 
   validate-plugin-json:
     name: plugin.json validation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
@@ -51,10 +51,12 @@ jobs:
 
   lint-matrix:
     name: py${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
+        # The supported range, from requires-python up, not a pin: widen it by hand when a
+        # Python is added to or dropped from support.
         python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
@@ -69,8 +71,11 @@ jobs:
           enable-cache: false
       - run: uv sync --group dev --frozen
       - uses: j178/prek-action@4e14d07f9231acabce116ccfca13b13dd9755ece  # v3.0.0
+        env:
+          # renovate: datasource=github-releases depName=j178/prek extractVersion=^v(?<version>.+)$
+          PREK_VERSION: 0.5.4
         with:
-          prek-version: 0.4.13
+          prek-version: ${{ env.PREK_VERSION }}
 
   # Aggregator. The ruleset requires a context literally named `lint`, and
   # required contexts are exact strings — there is no wildcard form. A matrix
@@ -82,7 +87,7 @@ jobs:
     name: lint
     needs: lint-matrix
     if: ${{ always() }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - if: needs.lint-matrix.result != 'success'
         run: exit 1

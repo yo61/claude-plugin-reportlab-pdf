@@ -1,3 +1,5 @@
+# Floors, not pins: this script is copied into users' projects, where their own resolver and
+# lockfile choose the versions. The floors are the major versions it was written against.
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
