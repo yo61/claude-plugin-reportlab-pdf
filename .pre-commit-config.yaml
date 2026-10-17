@@ -16,11 +16,6 @@ repos:
     hooks:
       - id: jactionlint
 
-  - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.30.1
-    hooks:
-      - id: zizmor
-
   # ruff runs via `uv run` so its version is single-sourced from uv.lock
   # (the only Python tooling dep declared in pyproject.toml). No second
   # `rev:` to keep aligned with anything.
